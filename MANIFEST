@@ -29,6 +29,7 @@ expected.h
 expected_c.txt
 expected_autowrap.txt
 expected_autowrap_c.txt
+expected_code.txt
 src/Polygon.c
 src/test.c
 src/test.alt
