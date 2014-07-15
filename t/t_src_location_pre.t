@@ -36,7 +36,7 @@ if($ok) {
 
 if($ok) {
   if(!open(RD2, "expected_autowrap_c.txt")) {
-    warn "unable to open expected_autowrap.txt for reading: $!\n";
+    warn "unable to open expected_autowrap_c.txt for reading: $!\n";
     print "not ok 1\n";
     $ok = 0;
   }
@@ -73,14 +73,14 @@ if($ok) {
 }
 
 if(!$ok2) {
-  warn "testc.txt does not match expected_autowrap.txt\n";
+  warn "testc.txt does not match expected_autowrap_c.txt\n";
   print "not ok 1\n";
 }
 
 elsif($ok) {print "ok 1\n"}
 
 close(RD1) or warn "Unable to close testc.txt after reading: $!\n";
-close(RD2) or warn "Unable to close expected_autowrap.txt after reading: $!\n";
+close(RD2) or warn "Unable to close expected_autowrap_c.txt after reading: $!\n";
 if(!unlink('testc.txt')) { warn "Couldn't unlink testc.txt\n"}
 
 ($ok, $ok2) = (1, 1);
