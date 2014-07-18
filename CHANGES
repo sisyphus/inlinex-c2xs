@@ -1,6 +1,6 @@
-- 0.23 ... "eval $VERSION;" in the created PM file - as per current recommendations
-            Add 'T' config option.
-            Add metadata to InlineX::C2XS Makefile.PL.
+- 0.23 ... Add 'T' config option.
+           Add metadata to InlineX::C2XS Makefile.PL.
+           Add Context.pm
 
 - 0.22 ... Add DIST and MANIF config options.
 
