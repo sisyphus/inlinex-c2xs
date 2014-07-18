@@ -8,6 +8,8 @@ script.in
 prereq_pm_test/exists
 testing/exists
 testing2/exists
+Context/Context.pm
+t/context.t
 t/pod.t
 t/prehead.in
 t/t_c.t
