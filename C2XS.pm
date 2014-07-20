@@ -7,10 +7,12 @@ use Config;
 require Exporter;
 our @ISA = qw(Exporter);
 
-our @EXPORT_OK = qw(c2xs);
+our @EXPORT_OK = qw(c2xs context context_blindly);
 
 our $VERSION = '0.23';
 #$VERSION = eval $VERSION;
+
+use InlineX::C2XS::Context;
 
 my $config_options;
 
@@ -130,6 +132,8 @@ sub c2xs {
     $o->{API}{cleanup} = 1;
     $o->{API}{module} = $module;
     $o->{API}{code} = $code;
+
+    if(exists($config_options->{PRE_HEAD})) {$o->{CONFIG}{PRE_HEAD} = $config_options->{PRE_HEAD}}
 
     if(exists($config_options->{BUILD_NOISY})) {$o->{CONFIG}{BUILD_NOISY} = $config_options->{BUILD_NOISY}}
 
@@ -449,6 +453,9 @@ sub _write_test_script {
 }
 
 ##=========================##
+
+*context         = \&InlineX::C2XS::Context::apply_context_args;
+*context_blindly = \&InlineX::C2XS::Context::apply_context_args_blindly;
 
 ##=========================##
 
