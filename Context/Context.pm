@@ -5,7 +5,7 @@ use warnings;
 
 our $VERSION = '0.23';
 
-sub apply_context_args {
+sub apply_context_args_blindly {
 
   # $_[0]: The XS file to which we want to apply the context args (aTHX, aTHX_, pTHX, pTHX_).
   # $_[1]: A reference to a list/array of the functions to which we *don't* want to apply
@@ -105,6 +105,13 @@ sub apply_context_args {
   close WR or die $!;
 
   print "$_[0] has been rewritten for PERL_NO_GET_CONTEXT\n";
+
+}
+
+###################################
+###################################
+
+sub apply_context_args {
 
 }
 
