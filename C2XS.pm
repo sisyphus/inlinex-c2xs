@@ -528,6 +528,59 @@ InlineX::C2XS - Convert from Inline C code to XS.
   As of version 0.19, a c2xs utility is also provided. It's just an
   Inline::C2XS wrapper - see 'c2xs --help'.
 
+  # Call context() after running c2xs() if and only if you've used
+  # the PRE_HEAD config option to define PERL_NO_GET_CONTEXT:
+  context($xs_file, \@func);
+   $xs_file is the location/name of the xs file that c2xs() wrote.
+   @func lists the functions to which the context args apply.
+   The rules are simple enough:
+
+    Define PERL_NO_GET_CONTEXT via PRE_HEAD option in $config_opts.
+
+    Don't specify the context args (pTHX, pTHX_, aTHX, aTHX_) in
+    your code at all. That is, just write the C code as though
+    PERL_NO_GET_CONTEXT had *not* been defined.
+
+    Write your function definitions on the one line. That is (eg),
+    instead of writing:
+
+      void
+      foo(SV* arg1)
+
+    write it as:
+
+      void foo(SV* arg)
+
+    Create an @func that lists the names of the functions that must
+    (or you wish to) take the context args. It's only the functions
+    that make use of perl's API that actually *have* to take the
+    context args.
+
+    Do:
+     c2xs($mod, $pack, $loc, $config_opts);
+     context("$loc/$pack.xs", \@funcs);
+
+    And check out the demo in demos/context. It's set up to build a
+    module whose XS file defines PERL_NO_GET_CONTEXT. In the
+    demos/context folder, run 'perl build.pl'. That perl script will
+    then create the XS file (and other files) needed for the
+    FOO module. The script first calls c2xs() to write FOO.xs (and
+    other files) in the FOO directory - then calls context() to
+    rewrite that XS file in accordance with the requirements of
+    PERL_NO_GET_CONTEXT.
+    Once that's done, you should be able to 'cd' to the FOO-0.01
+    folder and successfully run:
+
+      perl Makefile.PL
+      (d|n)make test
+      (d|n)make install (though I doubt you really want to do that.)
+      (d|n)make realclean
+
+
+  context_blindly($xs_file, \@excl, \@incl);
+   Used by the author (me, sisyphus) at times. Does the same job as
+   context() but is far more fragile. Use context() instead.
+
 =head1 DESCRIPTION
 
  Don't feed an actual Inline::C script to this module - it won't
