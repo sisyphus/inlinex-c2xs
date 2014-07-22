@@ -19,8 +19,8 @@ my $config_options;
 our @allowable_config_keys = ('AUTOWRAP', 'AUTO_INCLUDE', 'CODE', 'DIST', 'TYPEMAPS', 'LIBS', 'INC',
         'WRITE_MAKEFILE_PL', 'BUILD_NOISY', 'BOOT', 'BOOT_F', 'EXPORT_ALL', 'EXPORT_OK_ALL', 'MANIF',
         'EXPORT_TAGS_ALL', 'MAKE', 'PREFIX', 'PREREQ_PM', 'CCFLAGS', 'CCFLAGSEX', 'LD', 'LDDLFLAGS',
-        'MYEXTLIB', 'OPTIMIZE', 'PRE_HEAD', 'CC', 'SRC_LOCATION', 'T', '_TESTING', 'USE', 'USING',
-        'WRITE_PM', 'VERSION');
+        'MYEXTLIB', 'OPTIMIZE', 'PRE_HEAD', 'PROTOTYPE', 'PROTOTYPES', 'CC', 'SRC_LOCATION', 'T',
+        '_TESTING', 'USE', 'USING', 'WRITE_PM', 'VERSION');
 
 ##=========================##
 
@@ -133,7 +133,9 @@ sub c2xs {
     $o->{API}{module} = $module;
     $o->{API}{code} = $code;
 
-    if(exists($config_options->{PRE_HEAD})) {$o->{CONFIG}{PRE_HEAD} = $config_options->{PRE_HEAD}}
+    if(exists($config_options->{PROTOTYPE})) {$o->{CONFIG}{PROTOTYPE} = $config_options->{PROTOTYPE}}
+
+    if(exists($config_options->{PROTOTYPES})) {$o->{CONFIG}{PROTOTYPES} = $config_options->{PROTOTYPES}}
 
     if(exists($config_options->{BUILD_NOISY})) {$o->{CONFIG}{BUILD_NOISY} = $config_options->{BUILD_NOISY}}
 
@@ -549,7 +551,7 @@ InlineX::C2XS - Convert from Inline C code to XS.
 
     write it as:
 
-      void foo(SV* arg)
+      void foo(SV* arg1)
 
     Create an @func that lists the names of the functions that must
     (or you wish to) take the context args. It's only the functions
@@ -575,6 +577,8 @@ InlineX::C2XS - Convert from Inline C code to XS.
       (d|n)make test
       (d|n)make install (though I doubt you really want to do that.)
       (d|n)make realclean
+
+    The context() sub is definitely breakable - patches welcome.
 
 
   context_blindly($xs_file, \@excl, \@incl);
@@ -828,12 +832,29 @@ InlineX::C2XS - Convert from Inline C code to XS.
    The string to which PREREQ_PM is set will be reproduced as is in the
    generated Makefile.PL. That is, if you specify:
 
-   PREREQ_PM => "{'Some::Mod' => '1.23', 'Nother::Mod' => '3.21'}",
+    PREREQ_PM => "{'Some::Mod' => '1.23', 'Nother::Mod' => '3.21'}",
 
    then the WriteMakefile hash in the generated Makefile.PL will
    contain:
 
-   PREREQ_PM => {'Some::Mod' => '1.23', 'Nother::Mod' => '3.21'},
+    PREREQ_PM => {'Some::Mod' => '1.23', 'Nother::Mod' => '3.21'},
+  ----
+
+  PROTOTYPE
+   Corresponds to the XS keyword 'PROTOTYPE'. See the perlxs documentation
+   for both 'PROTOTYPES' and 'PROTOTYPE'. As an example, the following will
+   set the PROTOTYPE of the 'foo' function to '$', and disable prototyping
+   for the 'bar' function.
+
+    PROTOTYPE => {foo => '$', bar => 'DISABLE'}
+  ----
+
+  PROTOTYPES
+   Corresponds to the XS keyword 'PROTOTYPES'. Can take only values of
+   'ENABLE' or 'DISABLE'. (Contrary to XS, default value is 'DISABLE'). See
+   the perlxs documentation for both 'PROTOTYPES' and 'PROTOTYPE'.
+
+    PROTOTYPES => 'ENABLE';
   ----
 
   SRC_LOCATION
