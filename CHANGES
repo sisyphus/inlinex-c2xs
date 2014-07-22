@@ -1,6 +1,7 @@
 - 0.23 ... Add 'T' config option.
            Add metadata to InlineX::C2XS Makefile.PL.
-           Add Context.pm
+           Add Context.pm and demos/context.
+           Add PROTOTYPES and PROTOTYPE config options
 
 - 0.22 ... Add DIST and MANIF config options.
 
