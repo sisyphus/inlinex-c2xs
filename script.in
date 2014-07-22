@@ -43,6 +43,8 @@ Valid options are:
 --pre_head=<value>     eg --pre_head=/some/file.ext
 --prereq_pm=<value>    eg --prereq_pm=X::M1 1.23 ZZ::M2 0 (Must specify
                             name, space, version, space, name, ... etc)
+--prototype=<value>    eg --prototype=foo \$ bar DISABLE
+--prototypes=<value>   eg --prototypes=ENABLE (Default is DISABLE).
 --src=<value>               An alias for '--src_location='
 --src_location=<value> eg --src_location=/home/me/source.ext (See the
                             InlineX::C2XS docs.Default is './src/<mod>.c)
@@ -128,6 +130,9 @@ for(my $i = 0; $i < @vals; $i++) {
      $opts{$kname} = fix_USE($vals[$i]);
    }
    elsif($kname eq 'PREREQ_PM') {
+     $opts{$kname} = fix_PREREQ_PM($vals[$i]);
+   }
+   elsif($kname eq 'PROTOTYPE') {
      $opts{$kname} = fix_PREREQ_PM($vals[$i]);
    }
    else {
