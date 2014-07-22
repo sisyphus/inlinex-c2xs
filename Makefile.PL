@@ -25,7 +25,7 @@ my %options =
   (
   NAME     => 'InlineX::C2XS',
   PREREQ_PM => {
-                'Inline::C'  => 0.47,
+                'Inline::C'  => 0.54,
                 'Test::Warn' => $twv,
                },
   VERSION_FROM => 'C2XS.pm',
