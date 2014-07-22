@@ -45,6 +45,9 @@ demos/autowrap/MyMod.xs
 demos/autowrap/README
 demos/autowrap/src/MyMod.c
 demos/autowrap/t/test.t
+demos/context/FOO-0.01/t/01func.t
+demos/context/build.pl
+demos/context/src/FOO.c
 prereq_pm_test/exists
 testing/exists
 testing2/exists
