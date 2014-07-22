@@ -32,7 +32,8 @@ my %options =
   LICENSE  => 'perl',
 
   EXE_FILES => [$file],
-  clean => {FILES => '_Inline_test c2xs exports.pm exports.xs'},
+  clean => {FILES => '_Inline_test c2xs exports.pm exports.xs demos/context/FOO-0.01/*.*
+                      demos/context/FOO-0.01/MANIFEST demos/context/FOO-0.01/t/00load.t'},
   META_MERGE => {
    'meta-spec' => { version => 2 },
     resources => {
