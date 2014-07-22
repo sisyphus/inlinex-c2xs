@@ -59,7 +59,9 @@ sub apply_context_args_blindly {
     }
 
 
-    if($xs[$i] eq "SV *\n") {
+    if(
+       $xs[$i] =~ /^(A|H|S)V \*\n/
+       ) {
       my $function = $xs[$i + 1];
       chomp $function;
       my $jump = scalar(split /,/, $xs[$i + 1]);
@@ -138,15 +140,27 @@ sub apply_context_args {
     if $pTHX_warn;
 
   for my $f(@{$_[1]}) {
+    my $seen_pthx = 0;
     for(my $i = 1; $i < @xs; $i++) {
 
-      if($xs[$i] =~ /.+\b$f\b(\s+)?\(/) {
-         $xs[$i] !~ /\((\s+)?(void)?(\s+)?\)/ ? $xs[$i] =~ s/\(/\(pTHX_ /
-                               : $xs[$i] =~ s/\((\s+)?(void)?(\s+)?\)/\(pTHX\)/;
+      if($xs[$i] =~ /.+\b$f\b(\s+)?\(/ && !$seen_pthx) {
+         $xs[$i] !~ /\((\s+)?(void)?(\s+)?\)/
+                    ? $xs[$i] =~ /(a|p)THX/ ? $xs[$i] = $xs[$i]
+                                            : $xs[$i] =~ s/\(/\(pTHX_ /
+                    : $xs[$i] =~ s/\((\s+)?(void)?(\s+)?\)/\(pTHX\)/;
+         $seen_pthx = 1 if $xs[$i] =~ /pTHX/;
       }
 
 
-      if($xs[$i] eq "SV *\n") {
+      if(
+         (
+         $xs[$i] =~ /^(S|H|A)V \*\n/ ||
+         $xs[$i] =~ /^(signed |unsigned )?(long)?\s?int(\s\*)?\n/ ||
+         $xs[$i] =~ /^(long)?\s?double(\s\*)?\n/ ||
+         $xs[$i] =~ /^(signed |unsigned )?long(\s\*)?\n/
+         )
+         && $xs[$i + 1] =~ /^$f\b/
+        ) {
         my $function = $xs[$i + 1];
         chomp $function;
         my $jump = scalar(split /,/, $xs[$i + 1]);
@@ -183,7 +197,8 @@ sub apply_context_args {
         }
         $seen_pthx = 1 if $xs[$i] =~ /\b$f(\s+)?\(/;
         $xs[$i] =~ s/\b$f(\s+)?\((\s+)?(void)(\s+)?\)/$f(pTHX)/;
-        $xs[$i] =~ s/\b$f(\s+)?\(/$f(pTHX_ /;
+        $xs[$i] =~ s/\b$f(\s+)?\(/$f(pTHX_ /
+          unless $xs[$i] =~ /(p|a)THX/;
       }
     }
   }
