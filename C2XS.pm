@@ -553,6 +553,22 @@ InlineX::C2XS - Convert from Inline C code to XS.
 
       void foo(SV* arg1)
 
+    In your code, don't provide parentheses when not needed. For
+    example, instead of:
+
+      croak("Problem with one_func()");
+      warn("nother_func() might return something unwanted");
+
+    do:
+
+      croak("Problem with one_func");
+      warn("nother_func might return something unwanted");
+
+    Otherwise, the croak/warn messages might come out as:
+
+      croak("Problem with one_func(aTHX)");
+      warn("nother_func(aTHX) might return something unwanted");
+
     Create an @func that lists the names of the functions that must
     (or you wish to) take the context args. It's only the functions
     that make use of perl's API that actually *have* to take the
