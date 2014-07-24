@@ -7,7 +7,7 @@ use Config;
 require Exporter;
 our @ISA = qw(Exporter);
 
-our @EXPORT_OK = qw(c2xs context context_blindly);
+our @EXPORT_OK = qw(c2xs context);
 
 our $VERSION = '0.23';
 #$VERSION = eval $VERSION;
@@ -457,7 +457,6 @@ sub _write_test_script {
 ##=========================##
 
 *context         = \&InlineX::C2XS::Context::apply_context_args;
-*context_blindly = \&InlineX::C2XS::Context::apply_context_args_blindly;
 
 ##=========================##
 
@@ -530,6 +529,8 @@ InlineX::C2XS - Convert from Inline C code to XS.
   As of version 0.19, a c2xs utility is also provided. It's just an
   Inline::C2XS wrapper - see 'c2xs --help'.
 
+=head1 PERL_NO_GET_CONTEXT
+
   # Call context() after running c2xs() if and only if you've used
   # the PRE_HEAD config option to define PERL_NO_GET_CONTEXT:
   context($xs_file, \@func);
@@ -596,10 +597,6 @@ InlineX::C2XS - Convert from Inline C code to XS.
 
     The context() sub is definitely breakable - patches welcome.
 
-
-  context_blindly($xs_file, \@excl, \@incl);
-   Used by the author (me, sisyphus) at times. Does the same job as
-   context() but is far more fragile. Use context() instead.
 
 =head1 DESCRIPTION
 
