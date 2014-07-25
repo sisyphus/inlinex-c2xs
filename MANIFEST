@@ -25,7 +25,6 @@ t/t_src_location_pre.t
 t/t_makefile_pl_pre.t
 t/t_prehead.t
 t/t_prereq_pm.t
-t/t_using.t
 t/t_c2xs_utility.t
 expected.h
 expected_c.txt
