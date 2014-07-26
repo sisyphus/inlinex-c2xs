@@ -529,12 +529,9 @@ InlineX::C2XS - Convert from Inline C code to XS.
   As of version 0.19, a c2xs utility is also provided. It's just an
   Inline::C2XS wrapper - see 'c2xs --help'.
 
-=head1 PERL_NO_GET_CONTEXT
-
- Call context() after running c2xs() if and only if you've used
- the PRE_HEAD config option to define PERL_NO_GET_CONTEXT:
-
   context($xs_file, \@func);
+   Call context() after running c2xs() if and only if you've used
+   the PRE_HEAD config option to define PERL_NO_GET_CONTEXT.
    $xs_file is the location/name of the xs file that c2xs() wrote.
    @func lists the functions to which the context args apply.
    The rules are simple enough:
