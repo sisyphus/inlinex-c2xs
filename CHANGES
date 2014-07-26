@@ -2,6 +2,7 @@
            Add metadata to InlineX::C2XS Makefile.PL.
            Add Context.pm and demos/context.
            Add PROTOTYPES and PROTOTYPE config options
+           Remove t/t_using.t (broken by Inline-C-0.62)
 
 - 0.22 ... Add DIST and MANIF config options.
 
