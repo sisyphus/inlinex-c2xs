@@ -9,6 +9,7 @@ prereq_pm_test/exists
 testing/exists
 testing2/exists
 Context/Context.pm
+Context/Makefile.PL
 t/context.t
 t/pod.t
 t/prehead.in
@@ -51,3 +52,4 @@ prereq_pm_test/exists
 testing/exists
 testing2/exists
 META.yml
+META.json                                Module JSON meta-data (added by MakeMaker)
