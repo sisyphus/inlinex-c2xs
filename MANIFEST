@@ -52,4 +52,3 @@ prereq_pm_test/exists
 testing/exists
 testing2/exists
 META.yml
-META.json                                Module JSON meta-data (added by MakeMaker)
