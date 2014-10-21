@@ -1,3 +1,5 @@
+- 0.25 ... Escape braces {} in t/t_makefile_pl.t and t/t_makefile_pl_pre.t
+
 - 0.23 ... Add 'T' config option.
            Add metadata to InlineX::C2XS Makefile.PL.
            Add Context.pm and demos/context.
