@@ -9,7 +9,7 @@ our @ISA = qw(Exporter);
 
 our @EXPORT_OK = qw(c2xs context);
 
-our $VERSION = '0.24';
+our $VERSION = '0.25';
 #$VERSION = eval $VERSION;
 
 use InlineX::C2XS::Context;
@@ -952,7 +952,7 @@ InlineX::C2XS - Convert from Inline C code to XS.
 
   This program is free software; you may redistribute it and/or
   modify it under the same terms as Perl itself.
-  Copyright 2006-2009, 2010-12,Sisyphus
+  Copyright 2006-2009, 2010-12, 2014, 2016 Sisyphus
 
 
 =head1 AUTHOR
