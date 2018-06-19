@@ -1,4 +1,4 @@
-- 0.26 ...
+- 0.26 ... Close RD filehandle in Context.pm (See https://www.perlmonks.org/?node_id=1216930)
 
 - 0.25 ... Escape braces {} in t/t_makefile_pl.t and t/t_makefile_pl_pre.t
 
