@@ -952,7 +952,7 @@ InlineX::C2XS - Convert from Inline C code to XS.
 
   This program is free software; you may redistribute it and/or
   modify it under the same terms as Perl itself.
-  Copyright 2006-2009, 2010-12, 2014, 2016 Sisyphus
+  Copyright 2006-2009, 2010-12, 2014, 2016, 2018 Sisyphus
 
 
 =head1 AUTHOR
