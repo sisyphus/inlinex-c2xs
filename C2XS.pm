@@ -19,8 +19,8 @@ my $config_options;
 our @allowable_config_keys = ('AUTOWRAP', 'AUTO_INCLUDE', 'CODE', 'DIST', 'TYPEMAPS', 'LIBS', 'INC',
         'WRITE_MAKEFILE_PL', 'BUILD_NOISY', 'BOOT', 'BOOT_F', 'EXPORT_ALL', 'EXPORT_OK_ALL', 'MANIF',
         'EXPORT_TAGS_ALL', 'MAKE', 'PREFIX', 'PREREQ_PM', 'CCFLAGS', 'CCFLAGSEX', 'LD', 'LDDLFLAGS',
-        'MYEXTLIB', 'OPTIMIZE', 'PRE_HEAD', 'PROTOTYPE', 'PROTOTYPES', 'CC', 'SRC_LOCATION', 'T',
-        '_TESTING', 'USE', 'USING', 'WRITE_PM', 'VERSION', 'OBJECT');
+        'MYEXTLIB', 'OBJECT', 'OPTIMIZE', 'PRE_HEAD', 'PROTOTYPE', 'PROTOTYPES', 'CC', 'SRC_LOCATION', 'T',
+        '_TESTING', 'USE', 'USING', 'WRITE_PM', 'VERSION');
 
 ##=========================##
 
@@ -813,7 +813,7 @@ InlineX::C2XS - Convert from Inline C code to XS.
   ----
 
   OBJECT
-   As for ExtUtils::MakeMaker option of the same name.
+   As for ExtUtils::MakeMaker option of the same name. eg:
 
     OBJECT => '$(O_FILES)',
 
